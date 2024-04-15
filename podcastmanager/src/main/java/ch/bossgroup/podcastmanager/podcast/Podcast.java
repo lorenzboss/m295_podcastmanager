@@ -3,7 +3,6 @@ package ch.bossgroup.podcastmanager.podcast;
 import ch.bossgroup.podcastmanager.artist.Artist;
 import ch.bossgroup.podcastmanager.review.Review;
 import ch.bossgroup.podcastmanager.topic.Topic;
-import ch.bossgroup.podcastmanager.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
