@@ -1,7 +1,7 @@
 package ch.bossgroup.podcastmanager.review;
 
-import ch.bossgroup.podcastmanager.writer.Writer;
 import ch.bossgroup.podcastmanager.podcast.Podcast;
+import ch.bossgroup.podcastmanager.writer.Writer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -24,8 +24,8 @@ public class Review {
     @NotEmpty
     private String title;
 
-    @Column(nullable = true)
-    @Size(min = 2, max = 250)
+    @Column()
+    @Size(min = 5, max = 250)
     private String text;
 
     @ManyToOne(optional = false)
