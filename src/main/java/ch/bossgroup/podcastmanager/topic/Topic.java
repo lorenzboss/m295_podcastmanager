@@ -1,6 +1,5 @@
 package ch.bossgroup.podcastmanager.topic;
 
-import ch.bossgroup.podcastmanager.podcast.Podcast;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -22,9 +21,5 @@ public class Topic {
     @Size(min = 3, max = 30)
     @NotEmpty
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "podcast_id")
-    private Podcast podcast;
 
 }
