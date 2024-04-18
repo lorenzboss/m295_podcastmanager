@@ -1,7 +1,6 @@
 package ch.bossgroup.podcastmanager.podcast;
 
 import ch.bossgroup.podcastmanager.artist.Artist;
-import ch.bossgroup.podcastmanager.review.Review;
 import ch.bossgroup.podcastmanager.topic.Topic;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -27,8 +26,8 @@ public class Podcast {
     @NotEmpty
     private String title;
 
-    @Column(nullable = true)
-    @Size(min = 2, max = 250)
+    @Column()
+    @Size(min = 5, max = 250)
     private String description;
 
     @ManyToMany
@@ -39,9 +38,11 @@ public class Podcast {
     )
     private List<Artist> artists;
 
-    @OneToMany(mappedBy = "podcast", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "podcast_topic",
+            joinColumns = @JoinColumn(name = "podcast_id"),
+            inverseJoinColumns = @JoinColumn(name = "topic_id")
+    )
     private List<Topic> topics;
-
-    @OneToMany(mappedBy = "podcast", cascade = CascadeType.ALL)
-    private List<Review> reviews;
 }
