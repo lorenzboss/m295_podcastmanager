@@ -30,16 +30,12 @@ public class WriterService {
         if (repository.existsById(id)) {
             Writer newWriter = new Writer(id, writer.getFirstname(), writer.getLastname());
             return repository.save(newWriter);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public void deleteWriter(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 }

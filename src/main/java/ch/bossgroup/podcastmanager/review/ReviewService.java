@@ -30,16 +30,12 @@ public class ReviewService {
         if (repository.existsById(id)) {
             Review newReview = new Review(id, review.getTitle(), review.getText(), review.getWriter(), review.getPodcast());
             return repository.save(newReview);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public void deleteReview(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 }

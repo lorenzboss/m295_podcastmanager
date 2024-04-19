@@ -30,16 +30,12 @@ public class PodcastService {
         if (repository.existsById(id)) {
             Podcast newPodcast = new Podcast(id, podcast.getTitle(), podcast.getDescription(), podcast.getArtists(), podcast.getTopics());
             return repository.save(newPodcast);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public void deletePodcast(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 }

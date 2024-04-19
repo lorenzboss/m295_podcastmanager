@@ -30,16 +30,12 @@ public class TopicService {
         if (repository.existsById(id)) {
             Topic newTopic = new Topic(id, topic.getDescription());
             return repository.save(newTopic);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public void deleteTopic(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 }

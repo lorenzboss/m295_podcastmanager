@@ -30,16 +30,12 @@ public class ArtistService {
         if (repository.existsById(id)) {
             Artist newArtist = new Artist(id, artist.getFirstname(), artist.getLastname());
             return repository.save(newArtist);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public void deleteArtist(Long id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
-        }
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 }
