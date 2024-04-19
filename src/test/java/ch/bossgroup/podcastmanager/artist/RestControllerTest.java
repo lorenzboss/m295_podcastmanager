@@ -153,7 +153,6 @@ class RestControllerTest {
     }
 
     private String obtainAccessToken() {
-
         RestTemplate rest = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
