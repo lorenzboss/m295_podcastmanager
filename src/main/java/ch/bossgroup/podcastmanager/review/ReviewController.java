@@ -34,6 +34,12 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
     }
 
+    @GetMapping("/api/podcastreview/{id}")
+    @RolesAllowed(Roles.user)
+    public ResponseEntity<List<Review>> getReviewForPodcastId(@PathVariable Long id) {
+        return new ResponseEntity<>(reviewService.getReviewForPodcastId(id), HttpStatus.OK);
+    }
+
     @PostMapping("/api/review")
     @RolesAllowed(Roles.staff)
     public ResponseEntity<Review> createReview(@RequestBody Review review) {

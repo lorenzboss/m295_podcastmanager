@@ -1,5 +1,7 @@
 package ch.bossgroup.podcastmanager.review;
 
+import ch.bossgroup.podcastmanager.podcast.Podcast;
+import ch.bossgroup.podcastmanager.podcast.PodcastRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.NoSuchElementException;
 public class ReviewService {
 
     private final ReviewRepository repository;
+    private final PodcastRepository podcastRepository;
 
-    public ReviewService(ReviewRepository repository) {
+    public ReviewService(ReviewRepository repository, PodcastRepository podcastRepository) {
         this.repository = repository;
+        this.podcastRepository = podcastRepository;
     }
 
     public List<Review> getAllReviews() {
@@ -20,6 +24,13 @@ public class ReviewService {
 
     public Review getReview(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Review> getReviewForPodcastId(Long id) {
+        if (podcastRepository.existsById(id)) {
+            Podcast podcast = podcastRepository.findById(id).orElse(null);
+            return repository.findByPodcastOrderById(podcast);
+        } else throw new NoSuchElementException("Object with Id: " + id + " does not exist!");
     }
 
     public Review saveReview(Review review) {
