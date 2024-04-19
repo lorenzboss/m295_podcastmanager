@@ -27,4 +27,8 @@ public class Artist {
     @NotEmpty
     private String lastname;
 
+    public Artist(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 }
