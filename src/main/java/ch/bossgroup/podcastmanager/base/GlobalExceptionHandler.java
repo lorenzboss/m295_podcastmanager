@@ -5,12 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.NoSuchElementException;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleException(Exception exception) {
+
+    @ExceptionHandler({NoSuchElementException.class})
+    public ResponseEntity<Object> handleException(NoSuchElementException exception) {
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .status(HttpStatus.NOT_FOUND)
                 .body(exception.getMessage());
     }
 }
