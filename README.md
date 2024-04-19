@@ -27,6 +27,7 @@
 
 ## Weitere Informationen
 
+- Swagger UI kann man über http://localhost:9090/ erreichen
 - Beispieldaten können auf folgender [Notion-Seite](https://lorenzboss.notion.site/Podcastmanager-7c5220e47616473f8b084ff88ea6fcc2) gefunden werden
 - Wenn man Daten hinzufügen möchte, solle man sich an folgende Reihenfolge halten:
     - Artist Daten hinzufügen
