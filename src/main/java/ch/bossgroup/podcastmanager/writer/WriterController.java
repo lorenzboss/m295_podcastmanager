@@ -24,31 +24,31 @@ public class WriterController {
 
     @GetMapping("/api/writer/{id}")
     @RolesAllowed(Roles.user)
-    public ResponseEntity<Writer> getWinner(@PathVariable Long id) {
+    public ResponseEntity<Writer> getWriter(@PathVariable Long id) {
         return new ResponseEntity<>(writerService.getWriter(id), HttpStatus.OK);
     }
 
     @GetMapping("/api/writer")
     @RolesAllowed(Roles.user)
-    public ResponseEntity<List<Writer>> getAllWinner() {
+    public ResponseEntity<List<Writer>> getAllWriter() {
         return new ResponseEntity<>(writerService.getAllWriters(), HttpStatus.OK);
     }
 
     @PostMapping("/api/writer")
-    @RolesAllowed(Roles.staff)
-    public ResponseEntity<Writer> createWinner(@RequestBody Writer writer) {
+    @RolesAllowed(Roles.user)
+    public ResponseEntity<Writer> createWriter(@RequestBody Writer writer) {
         return new ResponseEntity<>(writerService.saveWriter(writer), HttpStatus.CREATED);
     }
 
     @PutMapping("/api/writer/{id}")
     @RolesAllowed(Roles.staff)
-    public ResponseEntity<Writer> editWinner(@PathVariable Long id, @RequestBody Writer writer) {
+    public ResponseEntity<Writer> editWriter(@PathVariable Long id, @RequestBody Writer writer) {
         return new ResponseEntity<>(writerService.editWriter(writer, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/writer/{id}")
-    @RolesAllowed(Roles.admin)
-    public ResponseEntity<Writer> deleteWinner(@PathVariable Long id) {
+    @RolesAllowed(Roles.staff)
+    public ResponseEntity<Writer> deleteWriter(@PathVariable Long id) {
         writerService.deleteWriter(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

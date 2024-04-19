@@ -41,7 +41,7 @@ public class ReviewController {
     }
 
     @PostMapping("/api/review")
-    @RolesAllowed(Roles.staff)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
         return new ResponseEntity<>(reviewService.saveReview(review), HttpStatus.CREATED);
     }
@@ -53,7 +53,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/api/review/{id}")
-    @RolesAllowed(Roles.admin)
+    @RolesAllowed(Roles.staff)
     public ResponseEntity<Review> deleteReview(@PathVariable Long id) {
         reviewService.deleteReview(id);
         return new ResponseEntity<>(HttpStatus.OK);

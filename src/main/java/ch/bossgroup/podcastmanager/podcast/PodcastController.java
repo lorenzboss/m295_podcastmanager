@@ -35,19 +35,19 @@ public class PodcastController {
     }
 
     @PostMapping("/api/podcast")
-    @RolesAllowed(Roles.staff)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Podcast> createPodcast(@RequestBody Podcast podcast) {
         return new ResponseEntity<>(podcastService.savePodcast(podcast), HttpStatus.CREATED);
     }
 
     @PutMapping("/api/podcast/{id}")
-    @RolesAllowed(Roles.staff)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Podcast> editPodcast(@PathVariable Long id, @RequestBody Podcast podcast) {
         return new ResponseEntity<>(podcastService.editPodcast(podcast, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/podcast/{id}")
-    @RolesAllowed(Roles.admin)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Podcast> deletePodcast(@PathVariable Long id) {
         podcastService.deletePodcast(id);
         return new ResponseEntity<>(HttpStatus.OK);

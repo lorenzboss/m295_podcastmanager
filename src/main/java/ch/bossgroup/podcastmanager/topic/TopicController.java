@@ -35,19 +35,19 @@ public class TopicController {
     }
 
     @PostMapping("/api/topic")
-    @RolesAllowed(Roles.staff)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Topic> createTopic(@RequestBody Topic topic) {
         return new ResponseEntity<>(topicService.saveTopic(topic), HttpStatus.CREATED);
     }
 
     @PutMapping("/api/topic/{id}")
-    @RolesAllowed(Roles.staff)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Topic> editTopic(@PathVariable Long id, @RequestBody Topic topic) {
         return new ResponseEntity<>(topicService.editTopic(topic, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/topic/{id}")
-    @RolesAllowed(Roles.admin)
+    @RolesAllowed(Roles.user)
     public ResponseEntity<Topic> deleteTopic(@PathVariable Long id) {
         topicService.deleteTopic(id);
         return new ResponseEntity<>(HttpStatus.OK);
