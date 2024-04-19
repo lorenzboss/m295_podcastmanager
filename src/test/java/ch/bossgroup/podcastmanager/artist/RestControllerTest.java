@@ -70,20 +70,7 @@ class RestControllerTest {
         final Artist artist = new Artist(firstName, lastName);
         final String body = new ObjectMapper().writeValueAsString(artist);
 
-        ResultActions resultActions = api.perform(post("/api/artist")
-                        .header("Authorization", "Bearer " + this.accessToken)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
-                        .with(csrf()))
-                .andDo(print()).andExpect(status().isCreated());
-
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println(responseBody);
-
-        int colonIndex = responseBody.indexOf(":");
-        int commaIndex = responseBody.indexOf(",");
-        String idString = responseBody.substring(colonIndex + 1, commaIndex);
-        Long id = Long.parseLong(idString.trim());
+        Long id = getIdFromArtist(body);
 
         api.perform(get("/api/artist/" + id)
                         .header("Authorization", "Bearer " + this.accessToken)
@@ -121,20 +108,7 @@ class RestControllerTest {
         final Artist newArtist = new Artist(newFirstName, lastName);
         final String newBody = new ObjectMapper().writeValueAsString(newArtist);
 
-        ResultActions resultActions = api.perform(post("/api/artist")
-                        .header("Authorization", "Bearer " + this.accessToken)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body)
-                        .with(csrf()))
-                .andDo(print()).andExpect(status().isCreated());
-
-        String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println(responseBody);
-
-        int colonIndex = responseBody.indexOf(":");
-        int commaIndex = responseBody.indexOf(",");
-        String idString = responseBody.substring(colonIndex + 1, commaIndex);
-        Long id = Long.parseLong(idString.trim());
+       Long id = getIdFromArtist(body);
 
         api.perform(put("/api/artist/" + id)
                         .header("Authorization", "Bearer " + this.accessToken)
@@ -153,6 +127,15 @@ class RestControllerTest {
         final Artist artist = new Artist(firstName, lastName);
         final String body = new ObjectMapper().writeValueAsString(artist);
 
+       Long id = getIdFromArtist(body);
+
+        api.perform(delete("/api/artist/" + id)
+                        .header("Authorization", "Bearer " + this.accessToken)
+                        .with(csrf()))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    private Long getIdFromArtist(String body) throws Exception {
         ResultActions resultActions = api.perform(post("/api/artist")
                         .header("Authorization", "Bearer " + this.accessToken)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -166,14 +149,8 @@ class RestControllerTest {
         int colonIndex = responseBody.indexOf(":");
         int commaIndex = responseBody.indexOf(",");
         String idString = responseBody.substring(colonIndex + 1, commaIndex);
-        Long id = Long.parseLong(idString.trim());
-
-        api.perform(delete("/api/artist/" + id)
-                        .header("Authorization", "Bearer " + this.accessToken)
-                        .with(csrf()))
-                .andDo(print()).andExpect(status().isOk());
+        return Long.parseLong(idString.trim());
     }
-
 
     private String obtainAccessToken() {
 
